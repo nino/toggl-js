@@ -1,0 +1,53 @@
+{
+  "name": "toggl-js",
+  "version": "1.0.0",
+  "description": "JavaScript Toogl API",
+  "main": "index.js",
+  "repository": "https://github.com/nino/toggl-js",
+  "author": "Nino Annighöfer",
+  "license": "MIT",
+  "scripts": {
+    "build:babel":
+      "./node_modules/.bin/babel lib --out-dir=dist --ignore test.js",
+    "build:flow": "yarn exec flow-copy-source -i '**/__test__/**' lib dist",
+    "build": "yarn build:babel && yarn build:flow",
+    "prepublish": "yarn build",
+    "test": "yarn exec ava"
+  },
+  "files": ["dist/*.js"],
+  "devDependencies": {
+    "ava": "^0.24.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-plugin-module-resolver": "^3.0.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "eslint": "^4.9.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "flow-bin": "^0.57.3",
+    "flow-copy-source": "^1.2.1",
+    "flow-typed": "^2.2.3",
+    "prettier": "^1.7.4"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "invariant": "^2.2.2",
+    "lodash": "^4.17.4"
+  },
+  "ava": {
+    "require": ["babel-register"]
+  },
+  "babel": {
+    "presets": ["env", "flow"],
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "root": ["./src"]
+        }
+      ]
+    ]
+  }
+}
